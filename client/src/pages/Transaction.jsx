@@ -1,0 +1,20 @@
+import React from 'react'
+import Navbar from '../components/Navbar'
+import Transactions from '../components/Transaction'
+import Footer from '../components/Footer'
+
+const Transaction = () => {
+  return (
+    <>
+    <div className='display-flex-vertical'>
+    <div className='display-flex-horizontal'>
+      <Navbar />
+      <Transactions />
+    </div>
+      <Footer />
+    </div>
+    </>
+  )
+}
+
+export default Transaction

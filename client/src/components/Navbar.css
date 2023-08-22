@@ -1,0 +1,40 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 35px;
+    margin-top: 60px;
+    height: 75vh;
+    padding: 25px;
+    font-size: 16px;
+    backdrop-filter: blur(5px) saturate(130%);
+    -webkit-backdrop-filter: blur(5px) saturate(100%);
+    background-color: rgba(255, 236, 238, 0.699);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.463);
+}
+
+.intro{
+    display: flex;
+    justify-content: space-around;
+}
+
+.intro img{
+    width: 40px;
+    height: 40px;
+    align-self: center;
+    border-radius: 50%;
+}
+
+.nav-links{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 15px;
+}
+
+.link{
+    text-decoration: none;
+    color: black;
+    margin: 10px;
+}

@@ -1,0 +1,78 @@
+#dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#pie-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
+#pie img{
+    width: 200px;
+    border-radius: 50%;
+    align-self: center;
+}
+
+#recent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 25%;
+    height: 100%;
+    /* border: 2px solid red; */
+}
+
+.recent-item{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 8px 15px 8px 15px;
+    margin: 8px;
+}
+
+#two-columns{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 10px;
+    width: 30%;
+    height: 80px;
+    padding: 15px;
+    /* height: 40%; */
+}
+
+.details-title{
+    font-size: 25px;
+}
+
+.details-amount{
+    font-size: 40px;
+}
+
+#income{
+    color: green;
+}
+
+#expenses{
+    color: red;
+}
+
+#balance{
+    color: orange;
+}
