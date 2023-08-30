@@ -1,39 +1,39 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import './Navbar.css'
 
 const Navbar = () => {
-  const [username,setUsername]=useState('');
-  
-  const callNavbarPage= async ()=>{
+  const [username, setUsername] = useState('');
+
+  const callNavbarPage = async () => {
     try {
-        const res=await fetch('/navbar',{
-          method:"GET",
-          headers:{
-            Accept: "application/json",
-            "Content-Type":"application/json"
-          },
-          credentials:"include"
-        });
+      const res = await fetch('/navbar', {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        credentials: "include"
+      });
 
-        const data=await res.json();
-        console.log('Displaying Data');
-        console.log(data)
-        setUsername(data.name)
+      const data = await res.json();
+      console.log('Displaying Data');
+      console.log(data)
+      setUsername(data.name)
 
-        if(!res.status === 200){
-          const error=new Error(res.error);
-          throw error;
-        }
-    } catch (e){
-        console.log(e);
-        setUsername('User')
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (e) {
+      console.log(e);
+      setUsername('User')
     }
   }
 
   useEffect(() => {
     callNavbarPage();
-  },[])
+  }, [])
 
   return (
     <>
@@ -46,12 +46,12 @@ const Navbar = () => {
           <p className="name">{username}</p>
         </div>
         <div className="nav-links">
-          <NavLink className="link" to="/login">
+          {/* <NavLink className="link" to="/login">
             Login
-          </NavLink>
-          <NavLink className="link" to="/register">
+          </NavLink> */}
+          {/* <NavLink className="link" to="/register">
             Register
-          </NavLink>
+          </NavLink> */}
           <NavLink className="link" to="/profile">
             Profile
           </NavLink>
@@ -70,9 +70,9 @@ const Navbar = () => {
           <NavLink className="link" to="/contact">
             Contact Us
           </NavLink>
-          <NavLink className="link" to="/logout">
+          {/* <NavLink className="link" to="/logout">
             Logout
-          </NavLink>
+          </NavLink> */}
         </div>
       </aside>
     </>

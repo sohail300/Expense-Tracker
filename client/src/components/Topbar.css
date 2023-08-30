@@ -1,0 +1,39 @@
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 48px;
+}
+
+.topbar h2{
+  color: #fff;
+  color: rgba(255,215,00);
+}
+
+.reg-btns-div {
+  display: flex;
+  align-items: center;
+}
+
+.reg-btns {
+  height: 32px;
+  padding: 20px;
+  margin: 0px 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.reg-btns:hover {
+  box-shadow: rgba(255,215,00, 0.5) 0px 0px 20px 0px;
+}
+
+.reg-btns {
+  color: #fff;
+  border: 2px double transparent;
+  background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)),
+    radial-gradient(circle at left top, rgb(255, 213, 0), rgb(255, 0, 106));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}

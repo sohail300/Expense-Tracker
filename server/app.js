@@ -1,23 +1,30 @@
-const express=require('express');
-// const cors=require('cors');
-const mongoose=require('mongoose');
-const dotenv=require('dotenv');
-const cookieParser = require('cookie-parser');
-const Authenticate = require('./middleware/authenticate');
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+import { connectDB } from './db/conn.js';
+import authRoute from './router/auth.js';
+import contactRoute from './router/contact.js';
+import apiRoute from './router/api.js';
 
-const app=express();
+const app = express();
+dotenv.config({ path: './config.env' });
 
-dotenv.config({path: './config.env'});
-
-require('./db/conn');
 app.use(express.json());
-app.use(require('./router/auth.js'));
-app.use(cookieParser());
-app.use(Authenticate);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(cors());
+connectDB();
 
-const PORT=process.env.PORT;
-app.listen(PORT || 5000,(err) =>{
-    console.log('App listening at port 5000');
+app.use('/auth', authRoute);
+app.use('/contact', contactRoute);
+app.use('/api', apiRoute);
+
+app.get('/', (req, res) => {
+    res.send('Root')
+})
+
+const PORT = process.env.PORT;
+app.listen(PORT || 5000, (err) => {
+    console.log(`App listening at port ${PORT}`);
 })

@@ -1,131 +1,126 @@
-const express = require("express");
+import express from 'express';
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+import { User } from '../model/schema.js';
+import { z } from 'zod';
+import { Authenticate } from '../middleware/authenticateJwt.js';
+
+dotenv.config({ path: '../config.env' })
+
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-require("../db/conn");
-const authenticate = require('../middleware/authenticate.js');
-// router.use(authenticate);
 
-const User = require("../model/userSchema.js");
+const registerInput = z.object({
+  name: z.string().min(1).max(20),
+  email: z.string().min(1).max(30).email(),
+  password: z.string().min(6).max(20),
+  cpassword: z.string().min(6).max(20)
+})
 
-router.post("/register", async (req, res) => {
-  const {
-    name,
-    email,
-    password,
-    confirmpassword,
-  } = req.body;
-
-  if (
-    !name ||
-    !email ||
-    !password ||
-    !confirmpassword
-  ) {
-    return res.status(422).json({ error: "Field left empty - Register" });
-  }
-
+router.post('/register', async (req, res) => {
   try {
-    const userExist = await User.findOne({ email: email });
-    // console.log("inside try");
-    if (userExist) {
-      return res.status(422).json({ error: "User already exists" });
-    } else if (password != confirmpassword) {
-      return res.status(422).json({ error: "Passwords not matching" });
+    const parsedInput = registerInput.safeParse(req.body);
+
+    if (!parsedInput.success) {
+      return res.status(411).json({
+        msg: parsedInput.error
+      })
     }
 
-    const user = new User({
-      name,
-      email,
-      password
-    });
+    const name = parsedInput.data.name;
+    const email = parsedInput.data.email;
+    const password = parsedInput.data.password;
+    const cpassword = parsedInput.data.cpassword;
 
-    // Called bcrypt middleware here
+    if (password != cpassword) {
+      return res.status(401).send('Invalid Credential')
+    }
 
-    const userRegister = await user.save();
+    const user = await User.findOne({ email });
 
-    if (userRegister) {
-      res.status(201).json({ message: "Registered successfully" });
+    if (user) {
+      return res.status(403).send('User already exists')
     } else {
-      res.status(500).json({ error: "Failed to Registered" });
+      const obj = {
+        name,
+        email,
+        password
+      }
+
+      const newUser = new User(obj);
+      newUser.save();
+      console.log("New User created");
+
+      const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, { expiresIn: '1h' })
+      return res.status(201).json({ msg: 'User Created Successfully', token })
     }
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Database error" });
+    res.status(500).send('Internal error: ' + err);
   }
-});
+})
 
+const loginInput = z.object({
+  email: z.string().min(1).max(30).email(),
+  password: z.string().min(6).max(20),
+})
 
-router.post("/login", async (req, res) => {
-  // Collecting data from Frontend
-  console.log("Inside Login 1")
-  const { email, password } = req.body;
-  
-  // If any of the fields are left empty, then return an error msg with status 422
-  if (!email || !password) {
-    console.log('Field empty');
-    return res.status(400).json({ error: "Field left empty - Login" });
-  }
-  
+router.post('/login', async (req, res) => {
   try {
-    console.log('inside try');
-    // If the user doesn't exist, then return an error msg with status 422
-    const userLogin = await User.findOne({ email: email });
-    
-    if (!userLogin) {
-      console.log("Invalid Credentails")
-      return res.status(400).json({ error: "Invalid Credentails" });
-    }
-    
-    // Compare the passwords
-    const isMatch = await bcrypt.compare(password, userLogin.password);
-    console.log("Inside Login 2")
-    
-    // Generate cookie
-    const token = await userLogin.generateAuthToken();
-    console.log("Token:")
-    console.log(token);
-    
-   res.cookie('jwtoken', token, {
-      expires: new Date(Date.now() + 108000),
-       httpOnly: false
-    });
+    const parsedInput = loginInput.safeParse(req.body);
 
-    // If passwords don't match, then return an error msg with status 422
-    if (!isMatch) {
-      console.log("Invalid Credentails")
-      return res.status(400).json({ error: "Invalid Credentails" });
+    if (!parsedInput.success) {
+      return res.status(411).json({
+        msg: parsedInput.error
+      })
+    }
+
+    const email = parsedInput.data.email;
+    const password = parsedInput.data.password;
+
+    const user = await User.findOne({ email, password });
+
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' })
+      return res.status(201).json({ msg: 'User Created Successfully', token })
     } else {
-      console.log("Login successfully")
-      return res.status(201).json({ message: "Login successfully" });
+      return res.status(403).send('Invalid Username or Password')
     }
   } catch (err) {
-    console.log("Inside Error")
-    console.log(err);
-  }
-});
-
-router.get('/navbar',authenticate,(req,res) => {
-  console.log("In Navbar");
-  res.send(req.rootUser);
-})
-
-
-router.get('/dashboard',authenticate,(req,res) => {
-    console.log("In Dashboard");
-    res.send(req.rootUser);
-})
-
-router.get('/logout',(req,res)=> {
-  console.log("Logout");
-  if(res.clearCookie!= null){
-
-    res.clearCookie('jwtoken',{path:'/login'});
-    res.status(200).send('User Logout');
-  }
-  else {
-    console.log('null')
+    res.status(500).send('Internal error: ' + err);
   }
 })
 
-module.exports = router;
+router.get('/profile', Authenticate, async (req, res) => {
+  const id = req.user;
+  console.log(id);
+
+  const user = await User.findById(id);
+  // console.log(user);
+  if (user) {
+    const name = user.name;
+    console.log(name)
+    return res.json({ msg: "Name", name })
+  } else {
+    return res.send('Error');
+  }
+})
+
+router.put('/profile/:id', Authenticate, async (req, res) => {
+  const id = req.params.id;
+  const updateData = { name: req.body.newName };
+
+  const updatedDocument = await User.findOneAndUpdate({ _id: id }, updateData, { new: true })
+
+  if (updatedDocument) {
+    res.status(201).send('Document Updated')
+  } else {
+    res.status(404).send('Error')
+  }
+})
+
+router.get('/me', Authenticate, (req, res) => {
+  const id = req.user;
+  return res.json({ msg: "User id", id })
+})
+
+export default router;

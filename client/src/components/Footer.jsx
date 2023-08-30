@@ -4,7 +4,7 @@ const Footer = () => {
     const year=new Date().getFullYear();
   return (
     <>
-        <span>Copyright © {year} All Rights Reserved Md Sohail Ansari</span>
+        <span style={{color:"#fff"}}>Copyright © {year} All Rights Reserved Md Sohail Ansari</span>
     </>
   )
 }
