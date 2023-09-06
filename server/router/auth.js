@@ -95,10 +95,8 @@ router.get('/profile', Authenticate, async (req, res) => {
   console.log(id);
 
   const user = await User.findById(id);
-  // console.log(user);
   if (user) {
     const name = user.name;
-    console.log(name)
     return res.json({ msg: "Name", name })
   } else {
     return res.send('Error');
@@ -106,21 +104,36 @@ router.get('/profile', Authenticate, async (req, res) => {
 })
 
 router.put('/profile/:id', Authenticate, async (req, res) => {
+  console.log("1")
   const id = req.params.id;
-  const updateData = { name: req.body.newName };
-
+  const updateData = { name: req.body.name };
+  console.log("2")
+  
   const updatedDocument = await User.findOneAndUpdate({ _id: id }, updateData, { new: true })
-
+  
   if (updatedDocument) {
     res.status(201).send('Document Updated')
   } else {
     res.status(404).send('Error')
   }
+  console.log("3")
 })
 
 router.get('/me', Authenticate, (req, res) => {
   const id = req.user;
   return res.json({ msg: "User id", id })
+})
+
+router.get('/getprofile', Authenticate, async (req, res) => {
+  const id = req.user;
+
+  const user = await User.findById(id);
+  if (user) {
+    const name = user.name;
+    return res.json({ msg: "Name", name })
+  } else {
+    return res.send('Error');
+  }
 })
 
 export default router;

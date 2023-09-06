@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
 const transactionSchema= new mongoose.Schema({
   userId: String,
   title:String,
-  amount:String,
+  amount:Number,
   date:Date,
   description:String,
   type:String

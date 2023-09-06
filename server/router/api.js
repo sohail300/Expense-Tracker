@@ -70,29 +70,15 @@ router.post('/expense', Authenticate, async (req, res) => {
 })
 
 router.get('/transactions', Authenticate, async (req, res) => {
-    try{
-        const userId=req.user;
-        
-        let transactionsArray=[];
-        
-        transactionsArray=await Transaction.find({userId:userId})
-        
-        return res.status(200).json(transactionsArray);
-    } catch (err){
-        return res.status(204).send('err')
-    }
-})
+    try {
+        const userId = req.user;
 
-router.get('/dashboard', Authenticate, async (req, res) => {
-    try{
-        const userId=req.user;
-        
-        let transactionsArray=[];
-        
-        transactionsArray=await Transaction.find({userId:userId})
-        
+        let transactionsArray = [];
+
+        transactionsArray = await Transaction.find({ userId: userId })
+
         return res.status(200).json(transactionsArray);
-    } catch (err){
+    } catch (err) {
         return res.status(204).send('err')
     }
 })

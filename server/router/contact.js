@@ -34,7 +34,6 @@ router.post('/contact', Authenticate, async (req, res) => {
         currTime
     }
 
-
     const newContact = new Contact(obj);
     newContact.save();
     return res.send('Contact Added')
