@@ -49,6 +49,7 @@ const Transaction = () => {
     return (
       <>
         <div id="transaction" className='main-card'>
+        <h1 style={{color:"#fff",margin:"2px"}}>Transactions</h1>
           {
             transactionArray.map(item => {
               if (item.type === 'income') {

@@ -53,6 +53,11 @@ const Expense = () => {
       }
     })
     console.log(result)
+    setTitle("")
+    setAmount("")
+    setDate("")
+    setDescription("")
+    alert("Submitted!")
   }
 
   useEffect(() => {
@@ -73,46 +78,35 @@ const Expense = () => {
     <>
       <div id="expense-container" className="main-card">
         <form id="expense-form" method="POST">
-          <div id="title" className="expense-item">
-            <span>Title</span>
+          <h1>Expense</h1>
             <input
               type="text"
               name="expense-title"
-              id=""
-              value={title}
+              id="title" className="expense-item"
+              value={title} placeholder="Title"
               onChange={handleTitle}
             />
-          </div>
-          <div id="amount" className="expense-item">
-            <span>Amount</span>
             <input
               type="number"
               name="expense-amount"
-              id=""
-              value={amount}
+              id="amount" className="expense-item"
+              value={amount} placeholder="Amount"
               onChange={handleAmount}
             />
-          </div>
-          <div id="date" className="expense-item">
-            <span>Date</span>
             <input
               type="date"
               name="expense-date"
-              id=""
-              value={date}
+              id="tidatetle" className="expense-item"
+              value={date} placeholder="Date"
               onChange={handleDate}
             />
-          </div>
-          <div id="description" className="expense-item">
-            <span>Description</span>
             <input
               type="text"
               name="expense-description"
-              id=""
-              value={description}
+              id="date" className="expense-item"
+              value={description} placeholder="Description"
               onChange={handleDescription}
             />
-          </div>
           <button id="expense-button" onClick={postExpense}>Submit</button>
         </form>
         <div id="image">

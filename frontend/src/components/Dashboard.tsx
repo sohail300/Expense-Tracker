@@ -81,6 +81,7 @@ const Dashboard = () => {
     return (
       <>
         <div id="dashboard" className="main-card">
+        <h1 style={{color:"#fff",marginTop:"-10px",fontSize:"36px"}}>Dashboard</h1>
           <div id="pie-container">
             <div id="pie">
             <PieChart income={income} expense={expense} balance={balance}/>

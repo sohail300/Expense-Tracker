@@ -53,6 +53,11 @@ const Income = () => {
       }
     })
     console.log(result)
+    setTitle("")
+    setAmount("")
+    setDate("")
+    setDescription("")
+    alert("Submitted!")
   }
 
   useEffect(() => {
@@ -72,46 +77,32 @@ const Income = () => {
     <>
       <div id="income-container" className="main-card">
         <form id="income-form" method="POST">
-          <div id="title" className="income-item">
-            <span>Title</span>
+      <h1>Income</h1>
             <input
               type="text"
               name="income-title"
-              id=""
-              value={title}
+              id="title" className="income-item"
+              value={title} placeholder="Title"
               onChange={handleTitle}
             />
-          </div>
-          <div id="amount" className="income-item">
-            <span>Amount</span>
+
             <input
               type="number"
               name="income-amount"
-              id=""
-              value={amount}
+              id="amount" className="income-item"
+              value={amount} placeholder="Amount"
               onChange={handleAmount}
             />
-          </div>
-          <div id="date" className="income-item">
-            <span>Date</span>
             <input
               type="date"
               name="income-date"
-              id=""
-              value={date}
+              id="date" className="income-item"
+              value={date} placeholder="Date"
               onChange={handleDate}
             />
-          </div>
-          <div id="description" className="income-item">
-            <span>Description</span>
-            <input
-              type="text"
-              name="income-description"
-              id=""
-              value={description}
-              onChange={handleDescription}
-            />
-          </div>
+            <textarea name="income-description" id="description" className="income-item" cols="30" rows="5" value={description} placeholder="Description" onfocus="(this.type='date')"
+              onChange={handleDescription} />
+
           <button id="income-button" onClick={postIncome}>Submit</button>
         </form>
         <div id="image">

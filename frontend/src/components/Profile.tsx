@@ -67,6 +67,7 @@ const Profile = () => {
     return (
     <div id="profile" className="main-card">
       <form id="profile-form" method="post">
+        <h1>Profile</h1>
         <div className="name profile-item">
           Name:
           <input type="text" name="" id="" value={name} onChange={(e) => setName(e.target.value)} />
