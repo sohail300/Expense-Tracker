@@ -6,7 +6,8 @@ import { User } from "../model/schema.js";
 import { z } from "zod";
 import { Authenticate } from "../middleware/authenticateJwt.js";
 
-dotenv.config({ path: "../config.env" });
+// dotenv.config({ path: "../.env" });
+dotenv.config();
 
 const router = express.Router();
 
@@ -52,7 +53,7 @@ router.post("/register", async (req, res) => {
       console.log("New User created");
 
       if (!process.env.SECRET_KEY) {
-        throw new Error("DATABASE environment variable is not defined.");
+        throw new Error("3 DATABASE environment variable is not defined.");
       }
 
       const token = jwt.sign({ id: newUser._id }, process.env.SECRET_KEY, {
@@ -86,7 +87,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email, password });
 
     if (!process.env.SECRET_KEY) {
-      throw new Error("DATABASE environment variable is not defined.");
+      throw new Error("4 DATABASE environment variable is not defined.");
     }
 
     if (user) {

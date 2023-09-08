@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './Dashboard.css'
 import { NavLink, useNavigate } from "react-router-dom";
+import baseURL from './config.js'
 import PieChart from "./Piechart";
 import Login from './Login'
 import Loader from './Loader'
@@ -16,8 +17,12 @@ const Dashboard = () => {
   const [profileLoading, setProfileLoading] = useState(true)
   const [isLoading, setIsLoading] = useState(true);
 
+  const api = axios.create({
+    baseURL
+  });
+
   async function getData() {
-    const result = await axios.get('http://localhost:5000/auth/me', {
+    const result = await api.get('/auth/me', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }
@@ -30,7 +35,7 @@ const Dashboard = () => {
   }
 
   async function getTransactions() {
-    const result = await axios.get('http://localhost:5000/api/transactions', {
+    const result = await api.get('/api/transactions', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }

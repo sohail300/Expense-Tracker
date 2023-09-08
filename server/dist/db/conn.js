@@ -15,14 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
-// dotenv.config({ path: "./config.env" });
+// dotenv.config({ path: '../.env' });
 dotenv_1.default.config();
 const DB = process.env.DATABASE;
 function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             if (!DB) {
-                throw new Error("DATABASE environment variable is not defined.");
+                throw new Error("1 DATABASE environment variable is not defined.");
             }
             const uri = DB;
             yield mongoose_1.default.connect(uri);

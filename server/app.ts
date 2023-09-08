@@ -10,7 +10,7 @@ import contactRoute from './router/contact.js';
 import apiRoute from './router/api.js';
 
 const app = express();
-// dotenv.config({ path: './config.env' });
+// dotenv.config({ path: '../.env' });
 dotenv.config();
 
 app.use(express.json());
@@ -33,7 +33,7 @@ app.use('/contact', contactRoute);
 app.use('/api', apiRoute);
 
 app.get('/', (req, res) => {
-    res.send('Root')
+    res.send('Root Page')
 })
 
 const PORT = process.env.PORT;

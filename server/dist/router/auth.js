@@ -18,7 +18,8 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const schema_js_1 = require("../model/schema.js");
 const zod_1 = require("zod");
 const authenticateJwt_js_1 = require("../middleware/authenticateJwt.js");
-dotenv_1.default.config({ path: "../config.env" });
+// dotenv.config({ path: "../.env" });
+dotenv_1.default.config();
 const router = express_1.default.Router();
 const registerInput = zod_1.z.object({
     name: zod_1.z.string().min(1).max(20),
@@ -55,7 +56,7 @@ router.post("/register", (req, res) => __awaiter(void 0, void 0, void 0, functio
             newUser.save();
             console.log("New User created");
             if (!process.env.SECRET_KEY) {
-                throw new Error("DATABASE environment variable is not defined.");
+                throw new Error("3 DATABASE environment variable is not defined.");
             }
             const token = jsonwebtoken_1.default.sign({ id: newUser._id }, process.env.SECRET_KEY, {
                 expiresIn: "1h",
@@ -83,7 +84,7 @@ router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         const password = parsedInput.data.password;
         const user = yield schema_js_1.User.findOne({ email, password });
         if (!process.env.SECRET_KEY) {
-            throw new Error("DATABASE environment variable is not defined.");
+            throw new Error("4 DATABASE environment variable is not defined.");
         }
         if (user) {
             const token = jsonwebtoken_1.default.sign({ id: user._id }, process.env.SECRET_KEY, {

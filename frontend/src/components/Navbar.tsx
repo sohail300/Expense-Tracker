@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import './Navbar.css'
-import axios from 'axios'
+import "./Navbar.css";
+import baseURL from './config.js'
+import axios from "axios";
 
 const Navbar = () => {
-  const [name, setName] = useState('user');
+  const [name, setName] = useState("user");
 
-  async function getProfile(){
-    const result = await axios.get('http://localhost:5000/auth/getprofile', {
+  const api = axios.create({
+    baseURL
+  });
+
+  async function getProfile() {
+    const result = await api.get("/auth/getprofile", {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem('token')
-      }
-    })
-    if(result.data.name!=null){
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    if (result.data.name != null) {
       setName(result.data.name);
     }
   }
 
   useEffect(() => {
     getProfile();
-  }, [])
+  }, []);
 
   return (
     <>

@@ -4,6 +4,7 @@ import profilepng from "../images/profilepng.png";
 import { useEffect } from "react";
 import Login from './Login'
 import Loader from './Loader'
+import baseURL from './config.js'
 import axios from 'axios'
 
 const Profile = () => {
@@ -13,8 +14,12 @@ const Profile = () => {
   const [profileLoading, setProfileLoading] = useState(true)
   const [isLoading, setIsLoading] = useState(true);
 
+  const api = axios.create({
+    baseURL
+  });
+
   async function getData() {
-    const result = await axios.get('http://localhost:5000/auth/me', {
+    const result = await api.get('/auth/me', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }
@@ -25,7 +30,7 @@ const Profile = () => {
   }
 
   async function getProfile() {
-    const result = await axios.get('http://localhost:5000/auth/getprofile', {
+    const result = await api.get('/auth/getprofile', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }
@@ -43,7 +48,7 @@ const Profile = () => {
 
   async function setProfile(e) {
     e.preventDefault();
-    const result = await axios.put(`http://localhost:5000/auth/profile/${id}`, {
+    const result = await api.put(`/auth/profile/${id}`, {
       name
     }, {
       headers: {

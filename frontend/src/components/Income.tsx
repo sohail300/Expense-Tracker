@@ -3,6 +3,7 @@ import "./Income.css";
 import incomepng from "../images/incomepng.png";
 import Login from './Login'
 import Loader from './Loader'
+import baseURL from './config.js'
 import axios from "axios";
 
 const Income = () => {
@@ -13,6 +14,10 @@ const Income = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [signedUp, setSignedUp] = useState(null);
+
+  const api = axios.create({
+    baseURL
+  });
 
   function handleTitle(e) {
     setTitle(e.target.value);
@@ -31,7 +36,7 @@ const Income = () => {
   }
 
   async function getData() {
-    const result = await axios.get('http://localhost:5000/auth/me', {
+    const result = await api.get('/auth/me', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }
@@ -42,7 +47,7 @@ const Income = () => {
 
   async function postIncome(e) {
     e.preventDefault();
-    const result = await axios.post('http://localhost:5000/api/income', {
+    const result = await api.post('/api/income', {
       title,
       amount,
       date,

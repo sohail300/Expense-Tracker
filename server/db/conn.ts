@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-// dotenv.config({ path: "./config.env" });
+// dotenv.config({ path: '../.env' });
+
 dotenv.config();
 
 const DB = process.env.DATABASE;
@@ -9,7 +10,7 @@ const DB = process.env.DATABASE;
 export async function connectDB() {
   try {
     if(!DB){
-      throw new Error("DATABASE environment variable is not defined.");
+      throw new Error("1 DATABASE environment variable is not defined.");
     }
     
     const uri:string = DB;

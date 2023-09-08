@@ -15,14 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Authenticate = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
-// dotenv.config({ path: './config.env' });
-dotenv_1.default.config();
+dotenv_1.default.config({ path: '../.env' });
+// dotenv.config();
 const Authenticate = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const authHeader = req.headers.authorization;
     if (authHeader) {
         const token = authHeader.split(" ")[1];
         if (!process.env.SECRET_KEY) {
-            throw new Error("DATABASE environment variable is not defined.");
+            throw new Error("2 DATABASE environment variable is not defined.");
         }
         jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY, (err, user) => {
             if (err) {

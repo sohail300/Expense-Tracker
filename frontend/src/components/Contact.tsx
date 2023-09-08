@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Contact.css";
 import axios from "axios";
+import baseURL from './config.js'
 import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Loader from "./Loader";
@@ -12,9 +13,14 @@ const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  
+
+  const api = axios.create({
+    baseURL
+  });
 
   async function getData() {
-    const result = await axios.get("http://localhost:5000/auth/me", {
+    const result = await api.get("/auth/me", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -29,8 +35,8 @@ const Contact = () => {
 
   async function submitContactUs(e) {
     e.preventDefault();
-    const result = await axios.post(
-      "http://localhost:5000/contact/contact",
+    const result = await api.post(
+      "/contact/contact",
       {
         name,
         email,
@@ -63,7 +69,8 @@ const Contact = () => {
           type="text"
           name="contact-name"
           id="name"
-          className="contact-item" placeholder="Name"
+          className="contact-item"
+          placeholder="Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -71,7 +78,8 @@ const Contact = () => {
           type="email"
           name="contact-email"
           id="name"
-          className="contact-item" placeholder="Email"
+          className="contact-item"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -80,7 +88,8 @@ const Contact = () => {
           id="name"
           className="contact-item"
           cols="26"
-          rows="5" placeholder="Message"
+          rows="5"
+          placeholder="Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         ></textarea>
@@ -93,13 +102,18 @@ const Contact = () => {
         <br />
         <br />
         <span className="reg-text-contact">
-          <a href="https://portfolio-sohail60.vercel.app/" style={{color:"#fff"}}>
+          <a
+            href="https://portfolio-sohail60.vercel.app/"
+            style={{ color: "#fff" }}
+          >
             https://portfolio-sohail60.vercel.app/
           </a>
         </span>
         <br />
         <span className="reg-text-contact">
-          <a href="" style={{color:"#fff"}}>sohailatwork10@gmail.com</a>
+          <a href="" style={{ color: "#fff" }}>
+            sohailatwork10@gmail.com
+          </a>
         </span>
       </div>
     </div>

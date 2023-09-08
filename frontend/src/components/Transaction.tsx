@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Transaction.css'
 import Login from './Login'
 import Loader from './Loader'
+import baseURL from './config.js'
 import axios from "axios";
 
 const Transaction = () => {
@@ -10,8 +11,12 @@ const Transaction = () => {
   const [profileLoading, setProfileLoading] = useState(true)
   const [isLoading, setIsLoading] = useState(true);
 
+  const api = axios.create({
+    baseURL
+  });
+
   async function getData() {
-    const result = await axios.get('http://localhost:5000/auth/me', {
+    const result = await api.get('/auth/me', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }
@@ -21,7 +26,7 @@ const Transaction = () => {
   }
 
   async function getTransactions() {
-    const result = await axios.get('http://localhost:5000/api/transactions', {
+    const result = await api.get('/api/transactions', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }

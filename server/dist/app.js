@@ -12,7 +12,7 @@ const auth_js_1 = __importDefault(require("./router/auth.js"));
 const contact_js_1 = __importDefault(require("./router/contact.js"));
 const api_js_1 = __importDefault(require("./router/api.js"));
 const app = (0, express_1.default)();
-// dotenv.config({ path: './config.env' });
+// dotenv.config({ path: '../.env' });
 dotenv_1.default.config();
 app.use(express_1.default.json());
 app.use(body_parser_1.default.json());
@@ -29,7 +29,7 @@ app.use('/auth', auth_js_1.default);
 app.use('/contact', contact_js_1.default);
 app.use('/api', api_js_1.default);
 app.get('/', (req, res) => {
-    res.send('Root');
+    res.send('Root Page');
 });
 const PORT = process.env.PORT;
 app.listen(PORT || 5000, () => {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Expense.css";
+import baseURL from './config.js'
 import expensepng from "../images/expensepng.png";
 import Login from './Login'
 import Loader from './Loader'
@@ -13,6 +14,10 @@ const Expense = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [signedUp, setSignedUp] = useState(null);
+
+  const api = axios.create({
+    baseURL
+  });
 
   function handleTitle(e) {
     setTitle(e.target.value);
@@ -31,7 +36,7 @@ const Expense = () => {
   }
 
   async function getData() {
-    const result = await axios.get('http://localhost:5000/auth/me', {
+    const result = await api.get('/auth/me', {
       headers: {
         Authorization: "Bearer " + localStorage.getItem('token')
       }
@@ -42,7 +47,7 @@ const Expense = () => {
 
   async function postExpense(e) {
     e.preventDefault();
-    const result = await axios.post('http://localhost:5000/api/expense', {
+    const result = await api.post('/api/expense', {
       title,
       amount,
       date,

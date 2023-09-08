@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 import { User } from "../model/schema.js";
 import { Request, Response, NextFunction } from "express";
 
-// dotenv.config({ path: './config.env' });
-dotenv.config();
+dotenv.config({ path: '../.env' });
+// dotenv.config();
 
 export const Authenticate = async (
   req: Request,
@@ -16,7 +16,7 @@ export const Authenticate = async (
   if (authHeader) {
     const token = authHeader.split(" ")[1];
     if (!process.env.SECRET_KEY) {
-      throw new Error("DATABASE environment variable is not defined.");
+      throw new Error("2 DATABASE environment variable is not defined.");
     }
     jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
       if (err) {

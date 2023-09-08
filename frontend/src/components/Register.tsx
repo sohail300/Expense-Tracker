@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Register.css";
 import Loader from './Loader'
+import baseURL from './config.js'
 import axios from 'axios'
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -12,9 +13,13 @@ const Register = () => {
   const [cpassword, setCpassword] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
+  const api = axios.create({
+    baseURL
+  });
+
   const handleRegister = async (e) => {
     e.preventDefault();
-    const result = await axios.post('http://localhost:5000/auth/register', {
+    const result = await api.post('/auth/register', {
       name,
       email,
       password,

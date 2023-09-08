@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Login.css";
 import Loader from './Loader'
 import Lock from '../images/lock-outline.svg'
+import baseURL from './config.js'
 import axios from 'axios'
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -11,9 +12,13 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  const api = axios.create({
+    baseURL
+  });
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    const result = await axios.post('http://localhost:5000/auth/login', {
+    const result = await api.post('/auth/login', {
       email,
       password
     })
