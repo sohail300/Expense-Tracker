@@ -53,8 +53,8 @@ const Login = () => {
         </button>
       </form>
       <div className="side-login">
-        <div class="wrapper">
-          <div class="circle">
+        <div className="wrapper">
+          <div className="circle">
           <img src={Lock} alt=""/>
           </div>
         </div>
