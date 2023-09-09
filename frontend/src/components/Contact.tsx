@@ -14,7 +14,6 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   
-
   const api = axios.create({
     baseURL
   });

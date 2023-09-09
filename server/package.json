@@ -8,7 +8,7 @@
     "watch": "tsc -w",
     "start": "node dist/app.js",
     "dev": "nodemon dist/app.js",
-    "build": "tsc"
+    "build": "npm i && tsc"
   },
   "keywords": [],
   "author": "",
