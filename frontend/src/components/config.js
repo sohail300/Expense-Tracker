@@ -1,3 +1,3 @@
-const baseUrl = "https://forgetful-juice-production.up.railway.app";
+const baseUrl = "https://expense-tracker-avsv.onrender.com";
 
 export default baseUrl
