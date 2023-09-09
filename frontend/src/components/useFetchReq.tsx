@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import baseURL from './config.js'
 import axios from "axios";
 

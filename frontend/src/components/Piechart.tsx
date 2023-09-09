@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
-import { Chart, ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Chart, ArcElement } from "chart.js";
 
 const PieChart = (props) => {
     const income=props.income;

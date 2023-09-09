@@ -98,6 +98,7 @@ const Income = () => {
               value={amount} placeholder="Amount"
               onChange={handleAmount}
             />
+
             <input
               type="date"
               name="income-date"
@@ -105,8 +106,8 @@ const Income = () => {
               value={date} placeholder="Date"
               onChange={handleDate}
             />
-            <textarea name="income-description" id="description" className="income-item" cols="30" rows="5" value={description} placeholder="Description" onfocus="(this.type='date')"
-              onChange={handleDescription} />
+            
+            <textarea name="income-description" id="description" className="income-item" cols={30} rows={5} value={description} placeholder="Description" onChange={handleDescription} />
 
           <button id="income-button" onClick={postIncome}>Submit</button>
         </form>

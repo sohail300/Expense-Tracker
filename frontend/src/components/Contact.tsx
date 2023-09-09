@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Contact.css";
 import axios from "axios";
 import baseURL from './config.js'
-import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Loader from "./Loader";
 
 const Contact = () => {
-  const navigate = useNavigate();
   const [signedUp, setSignedUp] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -86,8 +84,8 @@ const Contact = () => {
           name="contact-message"
           id="name"
           className="contact-item"
-          cols="26"
-          rows="5"
+          cols={26}
+          rows={5}
           placeholder="Message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}

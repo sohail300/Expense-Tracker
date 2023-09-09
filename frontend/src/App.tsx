@@ -1,6 +1,5 @@
 import "./App.css";
 import React from "react";
-import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
@@ -15,16 +14,16 @@ function App() {
   return (
     <>
       <Routes>
-        <Route exact path="/" element={<Register />}></Route>
-        <Route exact path="register" element={<Register />}></Route>
-        <Route exact path="login" element={<Login />}></Route>
-        <Route exact path="profile" element={<Profile />}></Route>
-        <Route exact path="dashboard" element={<Dashboard />}></Route>
-        <Route exact path="transactions" element={<Transaction />}></Route>
-        <Route exact path="income" element={<Income />}></Route>
-        <Route exact path="expenses" element={<Expense />}></Route>
-        <Route exact path="contact" element={<Contact />}></Route>
-        <Route exact path="logout" element={<Register />}></Route>
+        <Route path="/" element={<Register />}></Route>
+        <Route path="register" element={<Register />}></Route>
+        <Route path="login" element={<Login />}></Route>
+        <Route path="profile" element={<Profile />}></Route>
+        <Route path="dashboard" element={<Dashboard />}></Route>
+        <Route path="transactions" element={<Transaction />}></Route>
+        <Route path="income" element={<Income />}></Route>
+        <Route path="expenses" element={<Expense />}></Route>
+        <Route path="contact" element={<Contact />}></Route>
+        <Route path="logout" element={<Register />}></Route>
       </Routes>
     </>
   );

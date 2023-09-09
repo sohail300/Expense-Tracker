@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import profilepng from "../images/profilepng.png";
 import { useEffect } from "react";
 import Login from './Login'
 import Loader from './Loader'
@@ -11,7 +10,6 @@ const Profile = () => {
   const [name, setName] = useState('user');
   const [id, setId] = useState('')
   const [signedUp, setSignedUp] = useState(null);
-  const [profileLoading, setProfileLoading] = useState(true)
   const [isLoading, setIsLoading] = useState(true);
 
   const api = axios.create({
@@ -26,7 +24,6 @@ const Profile = () => {
     })
     setId(result.data.id)
     setSignedUp(result.data.id)
-    setProfileLoading(false);
   }
 
   async function getProfile() {

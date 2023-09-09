@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./Register.css";
-import Loader from './Loader'
 import baseURL from './config.js'
 import axios from 'axios'
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -11,7 +10,6 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
 
   const api = axios.create({
     baseURL

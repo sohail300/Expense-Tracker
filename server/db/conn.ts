@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 // dotenv.config({ path: '../.env' });
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
 const DB = process.env.DATABASE;
 

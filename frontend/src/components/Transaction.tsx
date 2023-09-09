@@ -8,7 +8,6 @@ import axios from "axios";
 const Transaction = () => {
   const [signedUp, setSignedUp] = useState(null);
   const [transactionArray, setTransactionArray] = useState([])
-  const [profileLoading, setProfileLoading] = useState(true)
   const [isLoading, setIsLoading] = useState(true);
 
   const api = axios.create({
@@ -22,7 +21,6 @@ const Transaction = () => {
       }
     })
     setSignedUp(result.data.id)
-    setProfileLoading(false);
   }
 
   async function getTransactions() {

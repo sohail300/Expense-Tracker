@@ -101,17 +101,13 @@ const Expense = () => {
             <input
               type="date"
               name="expense-date"
-              id="tidatetle" className="expense-item"
+              id="date" className="expense-item"
               value={date} placeholder="Date"
               onChange={handleDate}
             />
-            <input
-              type="text"
-              name="expense-description"
-              id="date" className="expense-item"
-              value={description} placeholder="Description"
-              onChange={handleDescription}
-            />
+            
+            <textarea name="expense-description" id="description" className="expense-item" cols={30} rows={5} value={description} placeholder="Description" onChange={handleDescription} />
+
           <button id="expense-button" onClick={postExpense}>Submit</button>
         </form>
         <div id="image">
