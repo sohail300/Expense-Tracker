@@ -129,7 +129,7 @@ const Dashboard = () => {
           </div>
 
           <div id="balance" className="details">
-            <span className="details-title">Total Balance</span>
+            <span className="details-title">Savings </span>
             <span className="details-amount">{balance}</span>
           </div>
         </div>
