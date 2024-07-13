@@ -16,7 +16,7 @@ exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 // dotenv.config({ path: '../.env' });
-dotenv_1.default.config({ path: '../.env' });
+dotenv_1.default.config();
 const DB = process.env.DATABASE;
 function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
